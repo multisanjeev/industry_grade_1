@@ -22,7 +22,7 @@
     - name: Start the container
       docker_container:
         name: hariapp
-        image: "sanjeev0001/industry_grade1:o.o.{{DOCKER_TAG}}"
+        image: "sanjeev0001/industry_grade1:0.0.{{DOCKER_TAG}}"
         state: started
         published_ports:
           - 0.0.0.0:8080:8080
