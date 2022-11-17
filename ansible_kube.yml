@@ -9,5 +9,5 @@
       state: touch
    
   - name: run kubectl command
-    command: cat /home/ec2-user/file1.txt
+    command: kubectl apply -f pod-01.yml
     
