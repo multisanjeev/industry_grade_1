@@ -10,8 +10,8 @@
    
   - name: move file
     copy:
-    src: pod-01.yml
-    dest: /home/ec2-user/pod-01.yml
+      src: pod-01.yml
+      dest: /home/ec2-user/pod-01.yml
     
   - name: run kubectl command
     command: kubectl apply -f pod-01.yml
