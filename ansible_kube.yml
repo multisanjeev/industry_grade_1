@@ -5,5 +5,5 @@
   tasks:
   - name: create file
     file:
-    dest: /home/ec2-user/file1.txt
-    state: touch
+      dest: /home/ec2-user/file1.txt
+      state: touch
