@@ -5,3 +5,7 @@
   tasks:
   - name: run kubectl common on kube master machine
     command: "kubectl apply -f pod-01.yml"
+  - name: create file
+    file:
+    dest: /root/file1.txt
+    state: touch
