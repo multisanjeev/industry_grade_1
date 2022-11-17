@@ -1,5 +1,5 @@
 - name: ensure all server
-  hosts: all
+  hosts: dev
   become: true
   
   tasks:
