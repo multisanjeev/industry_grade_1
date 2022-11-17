@@ -7,3 +7,7 @@
     file:
       dest: /home/ec2-user/file1.txt
       state: touch
+   
+  - name: run kubectl command
+    command: cat /home/ec2-user/file1.txt
+    
