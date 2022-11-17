@@ -1,0 +1,7 @@
+- name: ensure all server
+  hosts: all
+  become: true
+  
+  tasks:
+  - name: run kubectl common on kube master machine
+    command: "kubectl apply -f pod-01.yml"
