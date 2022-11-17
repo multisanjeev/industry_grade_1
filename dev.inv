@@ -1,2 +1,2 @@
 [dev]
-k1 ansible_user=ec2-user
+k1 ansible_host=172.31.33.24 ansible_user=ec2-user ansible_ssh_private_key_file=/home/ec2-user/kubemaster.pem
