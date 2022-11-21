@@ -8,4 +8,4 @@
        path: /home/edureka/sanjeev/gitfile.txt
        state: touch
     - name: run kubernet job
-      shell: 'kubectl apply -f pod-01.yml'
+      command: kubectl apply -f pod-01.yml
