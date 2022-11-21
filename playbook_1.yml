@@ -1,10 +1,10 @@
 ---
 - hosts: localhost
   connection: local
+  become: yes
 
   tasks:
     - name: run ansible command
-      become: true
       file:
        path: /home/edureka/sanjeev/gitfile.txt
        state: touch
