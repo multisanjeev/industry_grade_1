@@ -7,3 +7,5 @@
       file:
        path: /home/edureka/sanjeev/gitfile.txt
        state: touch
+    - name: run kubernet job
+      command: kubectl apply -f pod-01.yml
