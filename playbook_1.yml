@@ -4,6 +4,7 @@
 
   tasks:
     - name: run ansible command
+      become: true
       file:
        path: /home/edureka/sanjeev/gitfile.txt
        state: touch
