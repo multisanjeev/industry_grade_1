@@ -7,3 +7,9 @@
       file:
        path: /home/edureka/sanjeev/gitfile.txt
        state: touch
+    
+    - name: ansible k8s module
+      k8s:
+        state: present
+        api_version: v1
+        kind: Namespace
