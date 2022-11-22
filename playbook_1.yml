@@ -5,7 +5,7 @@
   tasks:
     - name: run ansible command
       file:
-       path: /home/edureka/sanjeev/gitfile.txt
+       path: /home/edureka/gitfile.txt
        state: touch
     
     - name: ansible k8s module
