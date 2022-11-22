@@ -1,6 +1,9 @@
 ---
 - hosts: localhost
-  connection: local
+  remote_user: root
+  roles:
+    - role: ansible.kubernetes-modules
+    - role: hello-world
 
   tasks:
     - name: run ansible command
