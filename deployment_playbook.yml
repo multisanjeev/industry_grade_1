@@ -4,4 +4,4 @@
 
   tasks:
     - name: ansible k8s module
-      command: kubectl apply -f pod-01.yml --kubeconfig /home/edureka/.kube/admin.conf
+      command: kubectl apply -f kubernetes --kubeconfig /home/edureka/.kube/admin.conf
