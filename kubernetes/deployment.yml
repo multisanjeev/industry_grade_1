@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: abc-deployment
+  namespace: abc-namespace
+  labels:
+    app: abc
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: abc
+  template:
+    metadata:
+      labels:
+        app: abc
+
+    spec:
+      containers:
+      - name: abc-project
+        image: sanjeev0001/edureka_project_1
+        ports:
+        - containerPort: 8080
