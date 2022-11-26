@@ -1,53 +1,56 @@
 pipeline {
     agent any
-    tools {
-      maven 'maven3'
-    }
     
-    environment {
-      DOCKER_TAG = getVersion()
-    }
-
     stages {
         stage('SCM') {
             steps {
-                git credentialsId: 'git', 
-                    url: 'https://github.com/multisanjeev/industry_grade_1.git'
+                git 'https://github.com/multisanjeev/industry_grade_1.git'
             }
         }
         
-        stage('Maven Build') {
+        stage('compile project') {
             steps {
-                sh "mvn clean"
-                sh "mvn package"
+                sh "mvn compile"
             }
         }
         
-        stage('Docker build') {
+        stage('test and package project') {
             steps {
-                sh "docker build . -t sanjeev0001/industry_grade1:0.0.${DOCKER_TAG}"
+                sh "mvn test package"
+            }
+            post {
+              success {
+                junit 'target/surefire-reports/**/*.xml'
+              }
             }
         }
         
-        stage('Docker push image to hub') {
+        stage('code coverage report') {
             steps {
-               withCredentials([string(credentialsId: 'docker-hub', variable: 'dockerHubPwd')]) {
-                sh "docker login  -u sanjeev0001 -p ${dockerHubPwd}"
+                jacoco()
+            }
+        }
+        
+        stage ("Generate docker build") {
+            steps {
+                sh "docker build . -t sanjeev0001/edureka_project_1"
+            }
+        }
+        
+        stage ('Push image on container') {
+            steps {
+                withCredentials([string(credentialsId: 'docker_credentials', variable: 'dockerPwd')]) {
+                    sh 'docker login -u sanjeev0001 -p $dockerPwd'
+                }
+                //sh "docker push sanjeev0001/edureka_project_1:0.0.${env.BUILD_ID}"
+                sh "docker push sanjeev0001/edureka_project_1"
             }
             
-            sh "docker push sanjeev0001/industry_grade1:0.0.${DOCKER_TAG}" 
-            }
         }
-        
-        stage('ansible docker deploy') {
+        stage('ansible job') {
             steps {
-                ansiblePlaybook credentialsId: 'dev-server', disableHostKeyChecking: true, extras: '-e DOCKER_TAG=${DOCKER_TAG}', installation: 'ansible', inventory: 'dev.inv', playbook: 'deploy-docker.yml'
+                sh 'ansible-playbook deployment_playbook.yml'
             }
         }
     }
-}
-
-def getVersion() {
-    def commitHead = sh returnStdout: true, script: 'git rev-parse --short HEAD'
-    return commitHead
 }
