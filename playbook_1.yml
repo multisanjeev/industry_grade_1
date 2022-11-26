@@ -3,13 +3,5 @@
   remote_user: root
 
   tasks:
-    - name: run ansible command
-      file:
-       path: /home/edureka/gitfile.txt
-       state: touch
-    
     - name: ansible k8s module
-      k8s:
-        state: present
-        api_version: v1
-        kind: Namespace
+      command: kubectl apply -f pod-01.yml --kubeconfig /home/edureka/.kube/admin.conf
